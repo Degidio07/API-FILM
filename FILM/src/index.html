@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cilema Made in china</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-black text-white p-8">
+  <h1 class="text-6xl font-extrabold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-700 drop-shadow-2xl">🎬 CineVerse</h1>
+  <p class="text-center text-gray-300 mb-12 text-sm tracking-widest">Esplora il mondo del cinema</p>
+
+  <div class="max-w-6xl mx-auto mb-14">
+    <div class="flex flex-col md:flex-row items-center gap-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-xl p-6 rounded-3xl border border-red-600/30 shadow-2xl hover:border-red-600/50 transition-all duration-300">
+      <form id="searchForm" class="flex flex-1 items-center gap-4 w-full">
+        <svg class="text-red-500 flex-shrink-0" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <input id="searchInput" type="text" placeholder="Cerca un film..." class="flex-grow bg-transparent border-none text-white placeholder-gray-500 focus:outline-none text-lg focus:ring-0" />
+        <button type="submit" class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-red-600/50 transition-all duration-300 transform hover:scale-105 flex-shrink-0">Cerca</button>
+      </form>
+
+      <select id="genreFilter" class="w-full md:w-48 bg-gray-900/90 border border-red-600/30 rounded-xl px-5 py-3 text-white focus:outline-none hover:border-red-600/60 focus:border-red-600 transition-all backdrop-blur flex-shrink-0">
+        <option value="">Generi</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="loading" class="text-center text-red-500 text-lg hidden">⏳ Caricamento film...</div>
+  <div id="error" class="text-center text-red-400 text-lg hidden bg-red-900/20 border border-red-500/30 rounded-xl p-4 mb-8"></div>
+
+  <div id="moviesGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"></div>
+
+  <button id="scrollTopBtn" class="hidden fixed bottom-8 right-8 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white p-4 rounded-full shadow-2xl shadow-red-600/50 z-50 transition-all hover:scale-110 font-bold text-xl" aria-label="Torna su">↑</button>
+
+  <!-- Carica il bundle TypeScript compilato -->
+  <script type="module" src="./app/dist/main.js"></script>
+</body>
+</html>
