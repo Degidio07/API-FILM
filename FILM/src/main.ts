@@ -66,7 +66,6 @@ const searchInput = document.getElementById("searchInput") as HTMLInputElement |
 const moviesGrid = document.getElementById("moviesGrid") as HTMLElement | null;
 const loading = document.getElementById("loading") as HTMLElement | null;
 const errorBox = document.getElementById("error") as HTMLElement | null;
-const genreFilter = document.getElementById("genreFilter") as HTMLSelectElement | null;
 const scrollTopBtn = document.getElementById("scrollTopBtn") as HTMLElement | null;
 
 let movies: any[] = [];
@@ -96,8 +95,6 @@ searchForm?.addEventListener("submit", async (e) => {
 	if (!query) return;
 	await fetchMovies(query);
 });
-
-genreFilter?.addEventListener("change", () => renderMovies());
 
 async function fetchMovies(query: string) {
 	showError();
@@ -141,25 +138,14 @@ async function loadPopularMovies() {
 }
 
 function fillGenreFilter() {
-	if (!genreFilter) return;
-	const set = new Set<string>();
-	movies.forEach((m) => m?.Genre?.split(', ').forEach((g: string) => set.add(g)));
-	genreFilter.innerHTML = '<option value="">🎭 Tutti i generi</option>';
-	[...set].sort().forEach((g) => {
-		const opt = document.createElement('option');
-		opt.value = g;
-		opt.textContent = g;
-		genreFilter.appendChild(opt);
-	});
+	// Funzione mantenuta per compatibilità ma ora non fa nulla
 }
 
 function renderMovies() {
 	if (!moviesGrid) return;
-	const filter = genreFilter?.value || '';
-	const filtered = filter ? movies.filter((m) => m?.Genre?.includes(filter)) : movies;
 	
-	moviesGrid.innerHTML = filtered.length > 0
-		? filtered.map((movie) => {
+	moviesGrid.innerHTML = movies.length > 0
+		? movies.map((movie) => {
 			const poster = movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/300x450?text=No+Poster';
 			return `
 			<div class="movie-card relative bg-gradient-to-b from-gray-900/80 to-black/80 border border-red-600/20 rounded-2xl shadow-xl overflow-hidden cursor-pointer group hover:scale-105 transition-all duration-300 hover:border-red-600/50 hover:shadow-red-600/30">
@@ -168,14 +154,14 @@ function renderMovies() {
 				<div>
 				  <h2 class="text-xl font-bold text-white mb-1">${escapeHtml(movie.Title)}</h2>
 				  <p class="text-xs text-gray-200 mb-2">${escapeHtml(movie.Year)} • ${escapeHtml(movie.Genre || '')}</p>
-				  ${movie.Runtime ? `<p class='text-gray-300 text-sm'>🕒 ${escapeHtml(movie.Runtime)}</p>` : ''}
+				  ${movie.Runtime ? `<p class='text-gray-300 text-sm'> ${escapeHtml(movie.Runtime)}</p>` : ''}
 				  ${movie.imdbRating ? `<p class='text-yellow-400 text-sm font-semibold'>⭐ ${escapeHtml(movie.imdbRating)}/10</p>` : ''}
 				</div>
 				${movie.Plot ? `<p class='text-sm text-gray-100 italic line-clamp-3'>"${escapeHtml(movie.Plot)}"</p>` : ''}
 			  </div>
 			</div>`;
 		}).join('')
-		: '<div class="col-span-full text-center text-gray-500 py-12">Nessun film trovato con questo genere</div>';
+		: '<div class="col-span-full text-center text-gray-500 py-12">Nessun film trovato</div>';
 }
 
 window.addEventListener("scroll", () => {
