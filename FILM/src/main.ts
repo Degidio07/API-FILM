@@ -163,7 +163,7 @@ function renderMovies() {
 			const poster = movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/300x450?text=No+Poster';
 			return `
 			<div class="movie-card relative bg-gradient-to-b from-gray-900/80 to-black/80 border border-red-600/20 rounded-2xl shadow-xl overflow-hidden cursor-pointer group hover:scale-105 transition-all duration-300 hover:border-red-600/50 hover:shadow-red-600/30">
-			  <img src="${poster}" alt="${escapeHtml(movie.Title)}" class="w-full h-64 object-cover group-hover:blur-sm transition-all duration-500" />
+			  <img src="${poster}" alt="${escapeHtml(movie.Title)}" class="w-full h-96 object-contain bg-black group-hover:blur-sm transition-all duration-500" />
 			  <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-between p-4">
 				<div>
 				  <h2 class="text-xl font-bold text-white mb-1">${escapeHtml(movie.Title)}</h2>
