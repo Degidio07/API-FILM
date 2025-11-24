@@ -1,4 +1,6 @@
 export const environment = {
+	// Chiave API per OMDB
 	omdbApiKey: '6577ab89',
-	omdbBaseUrl: 'https://www.omdbapi.com' // changed to https and removed trailing slash for predictable URL building
+	// URL base per le richieste OMDB
+	omdbBaseUrl: 'https://www.omdbapi.com' 
 };

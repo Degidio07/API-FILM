@@ -8,5 +8,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
+  // Titolo dell'applicazione come segnale reattivo 
   protected readonly title = signal('FILM');
 }
